@@ -1,0 +1,68 @@
+name: Docker Build & Publish
+
+on:
+  push:
+    branches: [ "elx-main" ]
+    tags: [ "v*" ]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  packages: write
+
+env:
+  REGISTRY: ghcr.io
+  IMAGE: minio-console
+
+jobs:
+  build-and-push:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Determine build tag and metadata
+        id: meta
+        run: |
+          if [[ "${GITHUB_REF#refs/}" == tags/* ]]; then
+            BUILD_TAG="${GITHUB_REF#refs/tags/}"
+          else
+            BRANCH="${GITHUB_REF#refs/heads/}"
+            BUILD_TAG="${BRANCH}-dev"
+          fi
+          BUILD_TIME="$(date -u +%Y%m%dT%H%M%SZ)"
+          NODE_VERSION="$(cat .nvmrc 2>/dev/null || echo '')"
+          echo "BUILD_TAG=$BUILD_TAG" >> $GITHUB_OUTPUT
+          echo "BUILD_TIME=$BUILD_TIME" >> $GITHUB_OUTPUT
+          echo "NODE_VERSION=$NODE_VERSION" >> $GITHUB_OUTPUT
+
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v3
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+
+      - name: Login to GitHub Container Registry
+        uses: docker/login-action@v2
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build and push image
+        uses: docker/build-push-action@v4
+        with:
+          context: .
+          platforms: linux/amd64
+          push: true
+          tags: |
+            ${{ env.REGISTRY }}/${{ github.repository_owner }}/${{ env.IMAGE }}:${{ steps.meta.outputs.BUILD_TAG }}
+            ${{ env.REGISTRY }}/${{ github.repository_owner }}/${{ env.IMAGE }}:latest
+          build-args: |
+            build_version=${{ steps.meta.outputs.BUILD_TAG }}
+            build_time=${{ steps.meta.outputs.BUILD_TIME }}
+            NODE_VERSION=${{ steps.meta.outputs.NODE_VERSION }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
