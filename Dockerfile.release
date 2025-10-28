@@ -18,5 +18,5 @@ COPY console /console
 EXPOSE 9090
 
 USER 1000:1000
-ENTRYPOINT ["/console"]
-CMD [ "server"]
+ENTRYPOINT [ "./docker-entrypoint.sh" ]
+CMD [ "./console", "server" ]
