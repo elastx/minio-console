@@ -189,14 +189,14 @@ const Login = () => {
         }
         promoInfo={
           <span style={{ fontSize: 14, lineHeight: 1 }}>
-            Welcome to Elastx The Vault console!<br>
-            <br>
-            The Vault is built using MINIO and most functionality will be the same.<br>
-            If you need any help please look at our documentation at https://docs.elastx.cloud/docs/tech-previews/thevault/<br>
-            <br>
-            MINIO is a registered trademark of the MinIO Corporation and this product<br>
-            is not affiliated with or endorsed by the MinIO Corporation.<br>
-            All source code used for MINIO is publicly available in the elastx github repositories.<br>
+            Welcome to Elastx The Vault console!<br></br>
+            <br></br>
+            The Vault is built using MINIO and most functionality will be the same.<br></br>
+            If you need any help please look at our documentation at https://docs.elastx.cloud/docs/tech-previews/thevault/<br></br>
+            <br></br>
+            MINIO is a registered trademark of the MinIO Corporation and this product<br></br>
+            is not affiliated with or endorsed by the MinIO Corporation.<br></br>
+            All source code used for MINIO is publicly available in the elastx github repositories.<br></br>
           </span>
         }
       />

@@ -42,6 +42,7 @@ const License = () => {
                 <p>
                   The Vault is built using MINIO and most functionality will be the same.
                   If you need any help please look at our documentation at https://docs.elastx.cloud/docs/tech-previews/thevault/
+                </p>
                 <p>
                   MINIO is a registered trademark of the MinIO Corporation and this product
                   is not affiliated with or endorsed by the MinIO Corporation.
