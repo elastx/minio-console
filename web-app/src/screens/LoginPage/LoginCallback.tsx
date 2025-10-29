@@ -144,18 +144,19 @@ const LoginCallback = () => {
             }}
           >
             Welcome to<br></br>
-            <span style={{ fontSize: "clamp(6px, 8vw, 200px)" }}>CONSOLE</span>
+            <span style={{ fontSize: "clamp(6px, 8vw, 200px)" }}>The Vault</span>
           </span>
         }
         promoInfo={
           <span style={{ fontSize: 14, lineHeight: 1 }}>
-            This is just a fork of the MinIO Console for my own personal
-            educational purposes, and therefore it incorporates MinIO® source
-            code. You may also want to look for other maintained forks.
-            <br></br>
-            It is important to note that <strong>MINIO</strong> is a registered
-            trademark of the MinIO Corporation. Consequently, this project is
-            not affiliated with or endorsed by the MinIO Corporation.
+            Welcome to Elastx The Vault console!<br>
+            <br>
+            The Vault is built using MINIO and most functionality will be the same.<br>
+            If you need any help please look at our documentation at https://docs.elastx.cloud/docs/tech-previews/thevault/<br>
+            <br>
+            MINIO is a registered trademark of the MinIO Corporation and this product<br>
+            is not affiliated with or endorsed by the MinIO Corporation.<br>
+            All source code used for MINIO is publicly available in the elastx github repositories.<br>
           </span>
         }
       />
